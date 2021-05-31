@@ -1,14 +1,25 @@
 const express = require('express')
 const cors = require('cors')
-
+const bodyParser = require('body-parser')
 const { connectToDb } = require('./config/db.connect.js')
+
+// routes 
+const videos     = require('./routes/video.router')
+const liked      = require('./routes/liked.router')
+const watchlater = require('./routes/watchlater.router')
+const history    = require('./routes/history.router')
 
 //initialize the app
 const app = express()
 app.use(cors())
-
-//establish connection to the DB
+app.use(bodyParser.json())
 connectToDb()
+
+app.use('/videos' , videos )
+app.use('/liked-videos' , liked )
+app.use('/watchlater' , watchlater )
+app.use('/history' , history )
+//establish connection to the DB
 
 // home route
 app.get("/",(req , res)=>{
