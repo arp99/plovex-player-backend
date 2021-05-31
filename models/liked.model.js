@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema, model } = mongoose;
 
 const likedVideosSchema = new Schema({
-    _id :{ type : Schema.Types.ObjectId , ref: 'video'}
+    videos : [{ type:Schema.Types.ObjectId , ref: 'videos' }]
 })
 
 const likedVideo = model( 'like', likedVideosSchema )
