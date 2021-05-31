@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema, model } = mongoose;
 
 const watchlaterSchema = new Schema({
-    wactchlater: [{ type: Schema.Types.ObjectId ,  }]
+    _id : { type: Schema.Types.ObjectId , ref: 'video'}
 })
 
 const watchlaterVideo = model( 'watchlaterVideo', watchlaterSchema )
