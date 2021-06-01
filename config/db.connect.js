@@ -5,7 +5,8 @@ const connectToDb = () =>{
         `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.yjgwb.mongodb.net/plovex-playerDB?retryWrites=true&w=majority`,
         {
             useNewUrlParser:true,
-            useUnifiedTopology:true
+            useUnifiedTopology:true,
+            useCreateIndex: true
         }
     )
     .then(()=> console.log("Database successfully connected"))
