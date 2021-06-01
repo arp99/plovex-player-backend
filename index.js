@@ -21,7 +21,6 @@ app.use('/liked-videos' , liked )
 app.use('/watchlater' , watchlater )
 app.use('/history' , history )
 app.use('/playlists' , playlist )
-//establish connection to the DB
 
 // home route
 app.get("/",(req , res)=>{
