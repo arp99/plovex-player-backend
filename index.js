@@ -8,6 +8,7 @@ const videos     = require('./routes/video.router')
 const liked      = require('./routes/liked.router')
 const watchlater = require('./routes/watchlater.router')
 const history    = require('./routes/history.router')
+const playlist   = require('./routes/playlist.router')
 
 //initialize the app
 const app = express()
@@ -19,6 +20,7 @@ app.use('/videos' , videos )
 app.use('/liked-videos' , liked )
 app.use('/watchlater' , watchlater )
 app.use('/history' , history )
+app.use('/playlists' , playlist )
 //establish connection to the DB
 
 // home route
