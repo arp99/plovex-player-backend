@@ -25,7 +25,7 @@ router.route("/")
 router.route("/v/:videoId")
     .get( async ( req , res )=>{
         try{
-            const { videoId } = req.params()
+            const { videoId } = req.params
             const videoFound = await video.find({videoId: videoId})
             res.json({ success : true , video: videoFound })
         }catch(err){
