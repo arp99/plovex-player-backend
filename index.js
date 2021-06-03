@@ -1,8 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+require('dotenv').config() 
 const { connectToDb } = require('./config/db.connect.js')
-
+const PORT = process.env.PORT || 5000;
 // routes 
 const videos     = require('./routes/video.router')
 const liked      = require('./routes/liked.router')
@@ -28,6 +29,6 @@ app.get("/",(req , res)=>{
 })
 
 
-app.listen(3000 , ()=>{
+app.listen(PORT , ()=>{
     console.log("Server started")
 })
