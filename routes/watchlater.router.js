@@ -21,5 +21,13 @@ router.route('/')
             res.json({ success: false , message: "Unable to add to Watchlater" , errorMessage: err.message })
         }
     })
-
+    .delete( async ( req , res ) =>{
+        try{
+            const videoIdToRemove = req.body 
+            const deletedVideoId = await watchlaterVideo.findOneAndDelete({ _id : videoIdToRemove._id })
+            res.json({ success : true , message : "Successfully removed video from watchlater" , deletedVideoId })
+        }catch(err){
+            res.json({ success : false , message : "Unable to remove video from wathclater" , errorMessage : err.message })
+        }
+    })
 module.exports = router

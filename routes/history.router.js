@@ -21,5 +21,14 @@ router.route('/')
             res.json({ success: false , message: "Unable to add to watch history" , errorMessage: err.message })
         }
     })
+    .delete( async ( req , res )=>{
+        try{
+            const videoIdToRemove = req.body
+            const deletedVideoId = await history.findOneAndDelete({ _id : videoIdToRemove._id })
+            res.json({ success : true , message: "Successfully removed video from History" , deletedVideoId })
+        }catch(err){
+            res.json({ success : false , message:"Unable to remove video from history" , errorMessage : err.message })
+        }
+    })
 
 module.exports = router

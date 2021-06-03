@@ -21,5 +21,14 @@ router.route('/')
             res.json({ success : false , message: "Unable to add to liked videos" , errorMessage: err.message})
         }
     })
+    .delete( async ( req , res )=>{
+        try{
+            const videoIdToRemove = req.body
+            const removedVideoId = await likedVideo.findOneAndDelete({ _id : videoIdToRemove})
+            res.json({ success : true , message: "Removed from liked videos" , removedVideoId })
+        }catch(err){
+            res.json({ success : false , message : "Unable to remove from liked videos" , errorMessage: err.message })
+        }
+    })
 
 module.exports = router
