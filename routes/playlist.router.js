@@ -50,4 +50,21 @@ router.route('/:playlistId')
             res.json({ success : false , message: "Unable to delete playlist" , errorMessage : err.message })
         }
     })
-    module.exports = router
+
+router.route('/remove-video/:playlistId')
+    .delete( async ( req, res ) => {
+        try{
+            const { playlistId } = req.params
+            const videoId = req.query.videoId
+
+            const foundPlaylist = await playlist.findById(playlistId)
+            const updatedVideos = foundPlaylist.videos.filter(_id => _id != videoId)
+            foundPlaylist.videos = updatedVideos
+            const updatedPlaylist = await foundPlaylist.save()
+            res.json({ success : true, updatedPlaylist, message : "Video removed Successfully"})
+        }catch( err ){
+            res.json({ success : false, message : "Unable to remove video from playlist" })
+        }
+    })
+
+module.exports = router
