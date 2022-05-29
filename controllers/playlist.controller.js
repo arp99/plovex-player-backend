@@ -1,3 +1,5 @@
+const { playlist } = require("../models/playlist.model")
+
 const getAllPlaylist = async (req, res) => {
   try {
     const playlistData = await playlist.find({}).populate("videos");
