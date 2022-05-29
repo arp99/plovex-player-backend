@@ -1,34 +1,16 @@
-const express = require('express')
-const router= express.Router()
-const { likedVideo } = require('../models/liked.model')
+const express = require("express");
+const router = express.Router();
 
-router.route('/')
-    .get( async ( req , res )=>{ //fetch all liked videos
-        try{
-            let likedVideos = await likedVideo.find({}).populate("_id")
-            likedVideos = likedVideos.map(item => ({ ...item._id._doc}))
-            res.json({ success : true, likedVideos})
-        }catch(err){
-            res.json({ success : false , message:'Unable to fetch liked videos' , errorMessage : err.message})
-        }
-    })
-    .post( async ( req , res )=>{
-        try{
-            const videoToAdd = req.body 
-            const savedVideo = await likedVideo(videoToAdd).save()
-            res.json({ success : true , message: "Added to liked videos" , savedVideo})
-        }catch(err){
-            res.json({ success : false , message: "Unable to add to liked videos" , errorMessage: err.message})
-        }
-    })
-    .delete( async ( req , res )=>{
-        try{
-            const videoIdToRemove = req.body
-            const removedVideoId = await likedVideo.findOneAndDelete({ _id : videoIdToRemove})
-            res.json({ success : true , message: "Removed from liked videos" , removedVideoId })
-        }catch(err){
-            res.json({ success : false , message : "Unable to remove from liked videos" , errorMessage: err.message })
-        }
-    })
+const {
+  getLikedVideos,
+  addToLikeVideos,
+  removeFromLikeVideos,
+} = require("../controllers/likes.controller");
 
-module.exports = router
+router
+  .route("/")
+  .get(getLikedVideos)
+  .post(addToLikeVideos)
+  .delete(removeFromLikeVideos);
+
+module.exports = router;
